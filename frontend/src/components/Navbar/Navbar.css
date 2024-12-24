@@ -1,5 +1,6 @@
 .navbar{
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
+  background-color: #fff4f2;
   padding: 20px;
   display: flex;
   align-items: center;

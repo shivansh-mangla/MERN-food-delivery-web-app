@@ -1,0 +1,19 @@
+.place-order{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 50px;
+  margin-top: 100px;
+  padding: 0 15vw;
+}
+
+.place-order-left{
+  width: 100%;
+  max-width: max(30%, 500px);
+}
+
+.place-order-left .title{
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 50px
+}
