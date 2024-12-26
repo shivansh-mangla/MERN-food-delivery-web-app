@@ -25,3 +25,9 @@
   border-radius: 3px 0 0 3px;
   cursor: pointer;
 }
+
+
+.sidebar-options .active{
+  background-color: rgb(185, 185, 185);
+  border-color: tomato;
+}
