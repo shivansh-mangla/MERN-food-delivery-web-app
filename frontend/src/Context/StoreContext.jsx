@@ -5,7 +5,8 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) =>{
 
-  const url = "http://localhost:4000"
+  // const url = "http://localhost:4000"
+  const url = "https://d605-2405-201-403c-8097-2c57-907d-96c2-1bde.ngrok-free.app"
 
   const [food_list, setFoodList] = useState([]);
 
