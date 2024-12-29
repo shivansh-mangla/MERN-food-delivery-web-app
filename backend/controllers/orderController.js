@@ -79,6 +79,19 @@ const updateStatus = async (req, res) =>{
 }
 
 
+//api for getting order tracking info
+const trackOrder = async (req, res) =>{
+  try {
+    const order = await orderModel.findById(req.body.orderId)
+    // console.log(order)
+    return res.json({success: true, data: order})
+  } catch (error) {
+    console.error();
+    return res.json({success: false, message: "Error"})
+  }
+}
+
+
 //cancelling the order
 // const cancelOrder = async (req, res)=>{
 //   try {
@@ -89,4 +102,4 @@ const updateStatus = async (req, res) =>{
 //   }
 // }
 
-export {placeOrder, userOrders, getAllOrders, updateStatus}
+export {placeOrder, userOrders, getAllOrders, updateStatus, trackOrder}

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { use } from "react";
 import { createContext, useEffect, useState } from "react";
 
 export const StoreContext = createContext(null);
@@ -13,6 +14,8 @@ const StoreContextProvider = (props) =>{
   const [token, setToken] = useState("");
 
   const [cartItems, setCartItems] = useState({});
+
+  const [trackOrderId, setTrackOrderId] = useState("");
 
   const addToCart = async (itemId) => {
     if(!cartItems[itemId]){
@@ -76,7 +79,9 @@ const StoreContextProvider = (props) =>{
     getTotalCartAmount,
     url,
     token, 
-    setToken
+    setToken,
+    trackOrderId,
+    setTrackOrderId
   }
 
   return(

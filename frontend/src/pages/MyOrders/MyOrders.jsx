@@ -9,7 +9,7 @@ const MyOrders = () => {
 
   const [data, setData] = useState([])
 
-  const {url, token} = useContext(StoreContext);
+  const {url, token, setTrackOrderId} = useContext(StoreContext);
 
   const getOrders = async () => {
     const response = await axios.post(url+"/api/order/userorders", {}, {headers:{token}})
@@ -39,7 +39,7 @@ const MyOrders = () => {
               <p>$ {order.amount}</p>
               <p>Items: {order.items.length}</p>
               <p><span>&#x25cf;</span> <b>{order.status}</b></p>
-              <button>Track Order</button>
+              <button onClick={()=>{setTrackOrderId(order._id); localStorage.setItem('orderId', JSON.stringify(order._id)); navigate("/trackorder")}}>Track Order</button>
             </div>
           )
         })}

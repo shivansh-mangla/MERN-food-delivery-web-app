@@ -8,6 +8,7 @@ import Footer from './components/Footer/Footer'
 import LoginPopup from './components/LoginPopup/LoginPopup'
 import { ToastContainer, toast } from 'react-toastify';
 import MyOrders from './pages/MyOrders/MyOrders'
+import TrackOrder from './pages/TrackOrder/TrackOrder'
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/cart' element={<Cart/>} />
         <Route path='/order' element={<PlaceOrder/>} />
         <Route path='/myorders' element={<MyOrders/>} />
+        <Route path='/trackorder' element={<TrackOrder/>} />
       </Routes>
     </div>
     <Footer />
