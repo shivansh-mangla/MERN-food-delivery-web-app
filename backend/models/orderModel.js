@@ -8,7 +8,8 @@ const orderSchema = new mongoose.Schema({
   status: {type:String, default:"Order Placed"},
   date: {type:Date, default:Date.now()},
   payment: {type:Boolean, default:false},
-  qrCode: {type:String, default:""}
+  qrCode: {type:String, default:""},
+  riderId: {type:String, default:""}
 })
 
 

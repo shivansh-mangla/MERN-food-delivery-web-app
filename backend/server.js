@@ -6,6 +6,7 @@ import userRouter from "./routes/UserRoute.js";
 import "dotenv/config";
 import cartRouter from "./routes/CartRoute.js";
 import orderRouter from "./routes/OrderRoute.js";
+import riderRouter from "./routes/RiderRoute.js";
 
 
 //app config
@@ -26,6 +27,7 @@ app.use("/images", express.static('uploads'))  //exposing the 'uploads' folder o
 app.use("/api/user", userRouter)
 app.use("/api/cart", cartRouter)
 app.use("/api/order", orderRouter)
+app.use("/api/rider", riderRouter)
 
 app.get("/", (req, res)=>{
   res.send("API is Working!!")

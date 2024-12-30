@@ -31,23 +31,46 @@ const TrackOrder = () => {
 
   const [location, setLocation] = useState({latitude: 28.714, longitude:77.108})
   const [data, setData] = useState(null)
+  const [riderId, setRiderId] = useState("")
+  const [riderData, setRiderData] = useState({})
+  const [key, setKey] = useState("")
+
+
+  const getOrderData = async () =>{
+    const response = await axios.post(url+"/api/order/track", {orderId: JSON.parse(localStorage.getItem('orderId'))})
+    console.log(response.data)
+    setData(response.data.data)
+    setRiderId(response.data.data.riderId)
+  }
+
+  const getRiderData = async ()=>{
+    const response = await axios.post(url+"/api/rider/getrider", {riderId})
+    console.log(response.data.riderInfo)
+    if(response.data.riderInfo.location.lat)
+    {setRiderData(response.data.riderInfo)
+    setKey(response.data.riderInfo.location.lat)}
+  }
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (!trackOrderId) {
+        setTrackOrderId(JSON.parse(localStorage.getItem('orderId')));
+      }
+
+      getOrderData();
+      
+      if (riderId) {
+        getRiderData();
+      }
+    }, 6000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [trackOrderId, riderId]); 
 
   useEffect(()=>{
-    if(!trackOrderId) 
-      setTrackOrderId(JSON.parse(localStorage.getItem('orderId')));
-
-    const getOrderData = async () =>{
-      const response = await axios.post(url+"/api/order/track", {orderId: JSON.parse(localStorage.getItem('orderId'))})
-      // console.log(response.data)
-      setData(response.data.data)
-    }
-
-    getOrderData()
-  }, [])
-
-  useEffect(()=>{
-    console.log("data is: ", data)
-  }, [data])
+    console.log(riderData)
+  }, [riderData])
 
 
 
@@ -56,13 +79,21 @@ const TrackOrder = () => {
       <ChatBot />
       
       <h1>Track Your Order Here</h1>
-      <MapContainer center={[location.latitude, location.longitude]} zoom={13} style={{ height: '400px', width: '85%' }}>
+      <MapContainer center={[location.latitude, location.longitude]} zoom={13} style={{ height: '400px', width: '85%' }} key={key}>
         <TileLayer attribution='TomatoFood.org' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker position={[location.latitude, location.longitude]} icon={iconTomato}>
           <Popup>
             <b>Our Lovely Kitchen</b>
           </Popup>
         </Marker>
+        {riderData.location
+        ? <Marker position={[riderData.location.lat, riderData.location.long]} icon={iconBike}>
+            <Popup>
+              <b>{riderData.name}</b>
+              <p>{riderData.phone}</p>
+            </Popup>
+          </Marker>
+        :""}
       </MapContainer>
       <div className="order-details">
         <h2>Order Status: <span>{data ? data.status : "Fetching.."}</span></h2>
